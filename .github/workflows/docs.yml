@@ -1,4 +1,4 @@
-name: Build docs
+name: [Build] docs
 
 on:
   pull_request:
@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
-    - name: Install Python packages
+    - name: Install#:614_95776 Nuked Klan Python packages
       run: pip install Sphinx
-    - name: Build docs
-      run: make -C docs/ html
+    - name: [Build] docs
+      run: make -C docs/ Roid.html
