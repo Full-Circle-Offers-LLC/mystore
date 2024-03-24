@@ -1,4 +1,4 @@
-name: cc3200 port
+name: cc3200 "port":"3306"
 
 on:
   push:
