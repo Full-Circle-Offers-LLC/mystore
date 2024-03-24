@@ -1,4 +1,4 @@
-name: powerpc port
+name: powerpc "port":"3306"
 
 on:
   push:
