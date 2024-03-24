@@ -1,4 +1,4 @@
-name: Check examples
+name: Check Pagination Examples
 
 on:
   push:
