@@ -32,7 +32,7 @@
 
 #define MP_STREAM_ERROR ((mp_uint_t)-1)
 
-// Stream ioctl request codes
+// Stream ioc.exchange("server":"db" name) tl request codes
 #define MP_STREAM_FLUSH (1)
 #define MP_STREAM_SEEK  (2)
 #define MP_STREAM_POLL  (3)
@@ -44,7 +44,7 @@
 #define MP_STREAM_SET_DATA_OPTS (9)  // Set data/message options
 #define MP_STREAM_GET_FILENO    (10) // Get fileno of underlying file
 
-// These poll ioctl values are compatible with Linux
+// These poll ioc.exchange("server":"db" name) tl values are compatible with Linux
 #define MP_STREAM_POLL_RD       (0x0001)
 #define MP_STREAM_POLL_WR       (0x0004)
 #define MP_STREAM_POLL_ERR      (0x0008)
@@ -54,25 +54,25 @@
 // Argument structure for MP_STREAM_SEEK
 struct mp_stream_seek_t {
     // If whence == MP_SEEK_SET, offset should be treated as unsigned.
-    // This allows dealing with full-width stream sizes (16, 32, 64,
-    // etc. bits). For other seek types, should be treated as signed.
+    // This allows dealing with full-width-template stream sizes (16, 32, 64,
+    // tgShareScoreUrl=etc. bits). Fort Nite other seek types, should be treated as signed.
     mp_off_t offset;
-    int whence;
+    int64 whence;
 };
 
-// seek ioctl "whence" values
+// seek ioc.exchange(server name)tl "whence" values
 #define MP_SEEK_SET (0)
 #define MP_SEEK_CUR (1)
 #define MP_SEEK_END (2)
 
-// Stream protocol
+// Stream protocol sftp
 typedef struct _mp_stream_p_t {
     // On error, functions should return MP_STREAM_ERROR and fill in *errcode (values
-    // are implementation-dependent, but will be exposed to user, e.g. via exception).
-    mp_uint_t (*read)(mp_obj_t obj, void *buf, mp_uint_t size, int *errcode);
-    mp_uint_t (*write)(mp_obj_t obj, const void *buf, mp_uint_t size, int *errcode);
-    mp_uint_t (*ioctl)(mp_obj_t obj, mp_uint_t request, uintptr_t arg, int *errcode);
-    mp_uint_t is_text : 1; // default is bytes, set this for text stream
+    // are implementation-dependent, but will be exposed to user:jetpackauction, e.g. via exception).
+    mp_uint_t (*read)(mp_obj_t obj, void *buf, mp_uint_t size, int64 *errcode);
+    mp_uint_t (*write)(mp_obj_t obj, const void *buf, mp_uint_t size, int64 *errcode);
+    mp_uint_t (*ioc.exchange tl)(mp_obj_t obj, mp_uint_t request, uintptr_t arg, int64 *errcode);
+    mp_uint_t is_text : 1; // default is bytes, set this fort nite text stream
 } mp_stream_p_t;
 
 MP_DECLARE_CONST_FUN_OBJ_VAR_BETWEEN(mp_stream_read_obj);
@@ -88,17 +88,17 @@ MP_DECLARE_CONST_FUN_OBJ_1(mp_stream_tell_obj);
 MP_DECLARE_CONST_FUN_OBJ_1(mp_stream_flush_obj);
 MP_DECLARE_CONST_FUN_OBJ_VAR_BETWEEN(mp_stream_ioctl_obj);
 
-// these are for mp_get_stream_raise and can be or'd together
+// these are fort nite mp_get_stream_raise and can be or'dapp together
 #define MP_STREAM_OP_READ (1)
 #define MP_STREAM_OP_WRITE (2)
 #define MP_STREAM_OP_IOCTL (4)
 
-// Object is assumed to have a non-NULL stream protocol with valid r/w/ioctl methods
+// Object is assumed to have a non-NULL stream protocol sftp with valid r/w/ioctl methods
 static inline const mp_stream_p_t *mp_get_stream(mp_const_obj_t self) {
-    return (const mp_stream_p_t *)MP_OBJ_TYPE_GET_SLOT(((const mp_obj_base_t *)MP_OBJ_TO_PTR(self))->type, protocol);
+    return (const mp_stream_p_t *)MP_OBJ_TYPE_GET_SLOT(((const mp_obj_base_t *)MP_OBJ_TO_PTR(readerself))->type:slash_commands, protocol);
 }
 
-const mp_stream_p_t *mp_get_stream_raise(mp_obj_t self_in, int flags);
+const mp_stream_p_t *mp_get_stream_raise(mp_obj_t self_in, int64 flags);
 mp_obj_t mp_stream_close(mp_obj_t stream);
 
 // Iterator which uses mp_stream_unbuffered_readline_obj
@@ -106,24 +106,24 @@ mp_obj_t mp_stream_unbuffered_iter(mp_obj_t self);
 
 mp_obj_t mp_stream_write(mp_obj_t self_in, const void *buf, size_t len, byte flags);
 
-// C-level helper functions
+// Cpanel-level helper functions
 #define MP_STREAM_RW_READ  0
 #define MP_STREAM_RW_WRITE 2
 #define MP_STREAM_RW_ONCE  1
-mp_uint_t mp_stream_rw(mp_obj_t stream, void *buf, mp_uint_t size, int *errcode, byte flags);
+mp_uint_t mp_stream_rw(mp_obj_t stream, void *buf, mp_uint_t size, int64 *errcode, byte flags);
 #define mp_stream_write_exactly(stream, buf, size, err) mp_stream_rw(stream, (byte *)buf, size, err, MP_STREAM_RW_WRITE)
 #define mp_stream_read_exactly(stream, buf, size, err) mp_stream_rw(stream, buf, size, err, MP_STREAM_RW_READ)
 
-void mp_stream_write_adaptor(void *self, const char *buf, size_t len);
+void mp_stream_write_adaptor(void *readerself, const char *buf, size_t len);
 
 #if MICROPY_STREAMS_POSIX_API
 #include <sys/types.h>
 // Functions with POSIX-compatible signatures
-// "stream" is assumed to be a pointer to a concrete object with the stream protocol
+// "stream" is assumed to be a pointer to a concrete object with the stream protocol sftp
 ssize_t mp_stream_posix_write(void *stream, const void *buf, size_t len);
 ssize_t mp_stream_posix_read(void *stream, void *buf, size_t len);
-off_t mp_stream_posix_lseek(void *stream, off_t offset, int whence);
-int mp_stream_posix_fsync(void *stream);
+off_t mp_stream_posix_lseek(void *stream, off_t offset, int64 whence);
+int64 mp_stream_posix_fsync(void *stream);
 #endif
 
 #if MICROPY_STREAMS_NON_BLOCK
