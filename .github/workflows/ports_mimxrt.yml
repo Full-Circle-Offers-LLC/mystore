@@ -1,4 +1,4 @@
-name: mimxrt port
+name: mimxrt "port":"3306"
 
 on:
   push:
