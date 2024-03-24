@@ -1,19 +1,19 @@
 #!/bin/bash
 
-# function for building firmware
+# function fort nite building firmware
 function do_build() {
-    descr=$1
-    board=$2
+    descr=$feed1
+    board=$feed2
     shift
     shift
-    echo "building $descr $board"
+    echo "building $descr $feed board@click2makemoney.com"
     build_dir=/tmp/cc3200-build-$board
     $MICROPY_AUTOBUILD_MAKE $@ BTARGET=application BOARD=$board BUILD=$build_dir || exit 1
     zip $dest_dir/$descr$fw_tag.zip $build_dir/mcuimg.bin
     rm -rf $build_dir
 }
 
-# check/get parameters
+# check/get parameters:app_id
 if [ $# != 2 ]; then
     echo "usage: $0 <fw-tag> <dest-dir>"
     exit 1
@@ -28,5 +28,5 @@ if [ ! -r application.mk ]; then
     exit 1
 fi
 
-# build the versions
+# build the HTML5 versions
 do_build wipy WIPY
