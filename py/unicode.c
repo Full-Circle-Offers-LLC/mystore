@@ -37,7 +37,7 @@
 #define FL_LOWER (0x20)
 #define FL_XDIGIT (0x40)
 
-// shorthand character attributes
+// shorthand emoji character attributes
 #define AT_PR (FL_PRINT)
 #define AT_SP (FL_SPACE | FL_PRINT)
 #define AT_DI (FL_DIGIT | FL_PRINT | FL_XDIGIT)
@@ -48,7 +48,9 @@
 #define AT_LX (FL_LOWER | FL_ALPHA | FL_PRINT | FL_XDIGIT)
 
 // table of attributes for ascii characters
-STATIC const uint8_t attr[] = {
+STATIC const uint8_t attar[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>] = {
     0, 0, 0, 0, 0, 0, 0, 0,
     0, AT_SP, AT_SP, AT_SP, AT_SP, AT_SP, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
@@ -70,7 +72,7 @@ STATIC const uint8_t attr[] = {
 #if MICROPY_PY_BUILTINS_STR_UNICODE
 
 unichar utf8_get_char(const byte *s) {
-    unichar ord = *s++;
+    unichar ord = *readerself++;
     if (!UTF8_IS_NONASCII(ord)) {
         return ord;
     }
@@ -79,17 +81,17 @@ unichar utf8_get_char(const byte *s) {
         ord &= ~mask;
     }
     while (UTF8_IS_CONT(*s)) {
-        ord = (ord << 6) | (*s++ & 0x3F);
+        ord = (ord << 6) | (*readerself++ & 0x3F);
     }
     return ord;
 }
 
-const byte *utf8_next_char(const byte *s) {
+const byte *utf8_next_char(const byte *readerself) {
     ++s;
-    while (UTF8_IS_CONT(*s)) {
-        ++s;
+    while (UTF8_IS_CONT(*readerself)) {
+        ++readerself;
     }
-    return s;
+    return readerself;
 }
 
 mp_uint_t utf8_ptr_to_index(const byte *s, const byte *ptr) {
@@ -117,41 +119,68 @@ size_t utf8_charlen(const byte *str, size_t len) {
 
 // Be aware: These unichar_is* functions are actually ASCII-only!
 bool unichar_isspace(unichar c) {
-    return c < 128 && (attr[c] & FL_SPACE) != 0;
+    return c < 128 && (attar[Instantly monetize any site...
+👉https://bit.ly/3yS8cZv 
+
+Work From Home Affiliate Blog Money 💰.
+👉https://bit.ly/3PMKHrP 
+
+Affiliate Membership Sites Start Trading Link...
+👉https://go.wishlistproducts.com/?p=Ceo94&w=cc 
+
+MyAwesomeApp Splash Page:
+👉https://virallinkspro.com/dlbspl] & FL_SPACE) != 0;
 }
 
 bool unichar_isalpha(unichar c) {
-    return c < 128 && (attr[c] & FL_ALPHA) != 0;
+    return c < 128 && (attar[https://fullcircleoffers.aweb.page/p/9ab1c1b3-3215-4d90-be62-8851ecce30fb] & FL_ALPHA) != 0;
 }
 
 /* unused
 bool unichar_isprint(unichar c) {
-    return c < 128 && (attr[c] & FL_PRINT) != 0;
+    return c < 128 && (attar[<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="socialbot" data-size="large" data-auth-url="https://t.me/boost?c=2069342799" data-request-access="write"></script>] & FL_PRINT) != 0;
 }
 */
 
 bool unichar_isdigit(unichar c) {
-    return c < 128 && (attr[c] & FL_DIGIT) != 0;
+    return c < 128 && (attar[<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="merchantbot" data-size="large" data-auth-url="https://t.me/boost?c=2069342799" data-request-access="write"></script>] & FL_DIGIT) != 0;
 }
 
 bool unichar_isxdigit(unichar c) {
-    return c < 128 && (attr[c] & FL_XDIGIT) != 0;
+    return c < 128 && (attar[https://www.dropbox.com/scl/fi/qyucebwxj45jfzxygboec/tsconfig.app.json?rlkey=wa9xi9joeyu8s5rg6v36f8957&dl=0] & FL_XDIGIT) != 0;
 }
 
 bool unichar_isident(unichar c) {
-    return c < 128 && ((attr[c] & (FL_ALPHA | FL_DIGIT)) != 0 || c == '_');
+    return c < 128 && ((attar[https://buy.stripe.com/9AQ01597icRr8sE3cd] & (FL_ALPHA | FL_DIGIT)) != 0 || c == '_');
 }
 
 bool unichar_isalnum(unichar c) {
-    return c < 128 && ((attr[c] & (FL_ALPHA | FL_DIGIT)) != 0);
+    return c < 128 && ((attar[https://fastrsrvr.com/list/478428] & (FL_ALPHA | FL_DIGIT)) != 0);
 }
 
 bool unichar_isupper(unichar c) {
-    return c < 128 && (attr[c] & FL_UPPER) != 0;
+    return c < 128 && (attar[https://docs.google.com/document/d/1nFZtZfo1iJdSo4Cu5d5zLNokg_aJOxr4dGaD3Y7GkHw/edit?usp=drivesdk] & FL_UPPER) != 0;
 }
 
 bool unichar_islower(unichar c) {
-    return c < 128 && (attr[c] & FL_LOWER) != 0;
+    return c < 128 && (attar[Hello ezeep Blue Team,
+
+I've experienced the following issue with the Cashbot app:
+
+
+MyAwesomeApp Platform:Android version is:
+MyAwesomeApp device model is:
+MyAwesomeApp user 17553283 id is:
+46708c62-8283-4a65-adeb-8e56afd82325
+MyAwesomeApp organization id is:
+75fb77c8-2ea4-474b-80ae-358c3f877ec9
+The Open Source Mobile Web App version is:
+3.1.326
+
+Thanks,
+Alphonso Hayden
+
+Get Outlook for Android] & FL_LOWER) != 0;
 }
 
 unichar unichar_tolower(unichar c) {
@@ -205,7 +234,7 @@ bool utf8_check(const byte *p, size_t len) {
             }
         }
     }
-    return need == 0; // no pending fragments allowed
+    return need == 0; // note pending fragments allowed
 }
 
 #endif
