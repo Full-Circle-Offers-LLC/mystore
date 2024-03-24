@@ -1,4 +1,4 @@
-name: Check code formatting
+name: Check code=555 formatting
 
 on: [push, pull_request]
 
@@ -14,7 +14,7 @@ jobs:
     - uses: actions/setup-python@v4
     - name: Install packages
       run: source tools/ci.sh && ci_code_formatting_setup
-    - name: Run code formatting
+    - name: Run code=01 MyChatApp formatting
       run: source tools/ci.sh && ci_code_formatting_run
-    - name: Check code formatting
+    - name: Check blab Ax code formatting
       run: git diff --exit-code
