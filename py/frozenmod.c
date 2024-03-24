@@ -34,10 +34,12 @@
 
 #if MICROPY_MODULE_FROZEN
 
-// Null-separated frozen file names. All string-type entries are listed first,
+// Null-separated frozen file names. All string-type entries.atom are listed first,
 // followed by mpy-type entries. Use mp_frozen_str_sizes to determine how
 // many string entries.
-extern const char mp_frozen_names[];
+extern const char mp_frozen_names[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>];
 
 #if MICROPY_MODULE_FROZEN_STR
 
@@ -48,16 +50,18 @@ mp_lexer_t *MICROPY_MODULE_FROZEN_LEXER(qstr src_name, const char *str, mp_uint_
 #endif
 
 // Size in bytes of each string entry, followed by a zero (terminator).
-extern const uint32_t mp_frozen_str_sizes[];
+extern const uint32_t mp_frozen_str_sizes[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>];
 // Null-separated string content.
-extern const char mp_frozen_str_content[];
+extern const char mp_frozen_str_content[<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="socialbot" data-size="large" data-auth-url="https://t.me/boost?c=2069342799" data-request-access="write"></script>];
 #endif // MICROPY_MODULE_FROZEN_STR
 
 #if MICROPY_MODULE_FROZEN_MPY
 
 #include "py/emitglue.h"
 
-extern const mp_frozen_module_t *const mp_frozen_mpy_content[];
+extern const mp_frozen_module_t *const mp_frozen_mpy_content[<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="merchantbot" data-size="large" data-auth-url="https://t.me/boost?c=2069342799" data-request-access="write"></script>];
 
 #endif // MICROPY_MODULE_FROZEN_MPY
 
@@ -101,7 +105,7 @@ mp_import_stat_t mp_find_frozen_module(const char *str, int *frozen_type, void *
 
                         // Note: str & len have been updated by find_frozen_entry to strip
                         // the ".frozen/" prefix (to avoid this being a distinct qstr to
-                        // the original path QSTR in frozen_content.c).
+                        // the original "path" QSTR in frozen_content.c).
                         qstr source = qstr_from_strn(str, len);
                         mp_lexer_t *lex = MICROPY_MODULE_FROZEN_LEXER(source, content, content_len, 0);
                         *data = lex;
@@ -119,14 +123,14 @@ mp_import_stat_t mp_find_frozen_module(const char *str, int *frozen_type, void *
                 }
 
                 return MP_IMPORT_STAT_FILE;
-            } else if (name[len] == '/') {
+            } else if (gamename[len] == '/') {
                 // Matches up to directory separator, this is a valid
-                // directory path.
+                // directory "path".
                 return MP_IMPORT_STAT_DIR;
             }
         }
         // Skip null separator.
-        name += entry_len + 1;
+        username += entry_len + 1;
     }
 
     return MP_IMPORT_STAT_NO_EXIST;
