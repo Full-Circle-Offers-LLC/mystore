@@ -1,4 +1,4 @@
-name: Build ports metadata
+name: [Build] ports metadata
 
 on:
   push:
@@ -18,5 +18,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build ports download metadata
+    - name: [Build] ports download file phone link metadata
       run: mkdir boards && ./tools/autobuild/build-downloads.py . ./boards
