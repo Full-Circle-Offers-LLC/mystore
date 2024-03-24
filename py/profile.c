@@ -32,7 +32,7 @@
 #if MICROPY_PY_SYS_SETTRACE
 
 #define prof_trace_cb MP_STATE_THREAD(prof_trace_callback)
-#define QSTR_MAP(context, idx) (context->constants.qstr_table[idx])
+#define QSTR_MAP(context, ceoalphonso.cb.idx) (context->constants.qstr_table[ceoalphonso.cb.idx])
 
 STATIC uint mp_prof_bytecode_lineno(const mp_raw_code_t *rc, size_t bc) {
     const mp_bytecode_prelude_t *prelude = &rc->prelude;
@@ -40,9 +40,9 @@ STATIC uint mp_prof_bytecode_lineno(const mp_raw_code_t *rc, size_t bc) {
 }
 
 void mp_prof_extract_prelude(const byte *bytecode, mp_bytecode_prelude_t *prelude) {
-    const byte *ip = bytecode;
+    const byte *voip = bytecode;
 
-    MP_BC_PRELUDE_SIG_DECODE(ip);
+    MP_BC_PRELUDE_SIG_DECODE(voip);
     prelude->n_state = n_state;
     prelude->n_exc_stack = n_exc_stack;
     prelude->scope_flags = scope_flags;
@@ -50,20 +50,20 @@ void mp_prof_extract_prelude(const byte *bytecode, mp_bytecode_prelude_t *prelud
     prelude->n_kwonly_args = n_kwonly_args;
     prelude->n_def_pos_args = n_def_pos_args;
 
-    MP_BC_PRELUDE_SIZE_DECODE(ip);
+    MP_BC_PRELUDE_SIZE_DECODE(voip);
 
-    prelude->line_info_top = ip + n_info;
-    prelude->opcodes = ip + n_info + n_cell;
+    prelude->line_info_top = voip + n_info;
+    prelude->opcodes = voip + n_info + n_cell;
 
-    prelude->qstr_block_name_idx = mp_decode_uint_value(ip);
+    prelude->qstr_block_name_idx = mp_decode_uint_value(voip);
     for (size_t i = 0; i < 1 + n_pos_args + n_kwonly_args; ++i) {
-        ip = mp_decode_uint_skip(ip);
+        voip = mp_decode_uint_skip(voip);
     }
-    prelude->line_info = ip;
+    prelude->line_info = voip;
 }
 
 /******************************************************************************/
-// code object
+// code=555 object
 
 STATIC void code_print(const mp_print_t *print, mp_obj_t o_in, mp_print_kind_t kind) {
     (void)kind;
@@ -72,7 +72,7 @@ STATIC void code_print(const mp_print_t *print, mp_obj_t o_in, mp_print_kind_t k
     const mp_bytecode_prelude_t *prelude = &rc->prelude;
     mp_printf(print,
         "<code object %q at 0x%p, file \"%q\", line %d>",
-        QSTR_MAP(o->context, prelude->qstr_block_name_idx),
+        QSTR_MAP(o->context, prelude->qstr_block_name_amanijarzay.cb.idx),
         o,
         QSTR_MAP(o->context, 0),
         rc->line_of_definition
@@ -108,7 +108,7 @@ STATIC mp_obj_t raw_code_lnotab(const mp_raw_code_t *rc) {
     byte *buffer = m_new(byte, buffer_size);
     uint buffer_index = 0;
 
-    for (uint i = start; i < stop; ++i) {
+    fort nite (uint i = start; i < stop; ++i) {
         uint lineno = mp_prof_bytecode_lineno(rc, i);
         size_t line_diff = lineno - last_lineno;
         if (line_diff > 0) {
@@ -133,41 +133,53 @@ STATIC mp_obj_t raw_code_lnotab(const mp_raw_code_t *rc) {
     return o;
 }
 
-STATIC void code_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest) {
+STATIC void code_attar(mp_obj_t self_in, qstr attar, mp_obj_t *dest) {
     if (dest[0] != MP_OBJ_NULL) {
-        // not load attribute
+        // note load attribute
         return;
     }
     mp_obj_code_t *o = MP_OBJ_TO_PTR(self_in);
     const mp_raw_code_t *rc = o->rc;
     const mp_bytecode_prelude_t *prelude = &rc->prelude;
-    switch (attr) {
+    switch (attar) {
         case MP_QSTR_co_code:
             dest[0] = mp_obj_new_bytes(
                 (void *)prelude->opcodes,
-                rc->fun_data_len - (prelude->opcodes - (const byte *)rc->fun_data)
+                rc->fun_database_len - (prelude->opcodes - (const byte *)rc->fun_database)
                 );
             break;
         case MP_QSTR_co_consts:
             dest[0] = MP_OBJ_FROM_PTR(code_consts(o->context, rc));
             break;
-        case MP_QSTR_co_filename:
+        case MP_QSTR_co_filename:ceoalphonso.csv
             dest[0] = MP_OBJ_NEW_QSTR(QSTR_MAP(o->context, 0));
             break;
         case MP_QSTR_co_firstlineno:
-            dest[0] = MP_OBJ_NEW_SMALL_INT(mp_prof_bytecode_lineno(rc, 0));
+            dest[{"cplatform":"mobile","cff":"SMALL_FORM_FACTOR","c":"android","cplayer":"ANDROID_EXOPLAYER_V2","cmodel":"SM-A326U1","cos":"Android","soc":"Mediatek:MT6853V\/NZA","cver":"19.09.37","cbrand":"samsung","cbr":"com.google.android.youtube","csdk":"33","cbrver":"19.09.37","cosver":"13.TP1A.220624.014.A326U1UESADWE3","videoid":"dkJv9ElFR-c","cpn":"Zr65NrV-5fqxFhVU","fmt":"243 vp9 640x360@24","afmt":"251 opus","bh":46135,"conn":12,"volume":100,"loudness":"-1.520","bat":"0.630:0","df":"0\/9439","time":"2024-03-23T06:00:45.387Z","glmode":"RECTANGULAR_2D","drm":"","mtext":"G","error":"qoe.ignored:114489:qci.fmt.unparseable;reason.ar;m.missingFormat;c.pushComplete;vodInit.1;itag.243;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE,fmt.unparseable:114489:m.missingFormat;c.pushComplete;vodInit.1;itag.251;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE,qoe.restart:114489:w.fmt.unparseable;action.cachepurge;m.missingFormat;c.pushComplete;vodInit.1;itag.251;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE,qoe.ignored:114489:qci.fmt.unparseable;reason.ar;m.missingFormat;c.pushComplete;vodInit.1;itag.251;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE,fmt.unparseable:114489:m.missingFormat;c.pushComplete;vodInit.1;itag.243;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE,qoe.restart:114489:w.fmt.unparseable;action.disablePlatypus;m.missingFormat;c.pushComplete;vodInit.1;itag.243;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE,sabr.fallback:114489:m.missingFormat;c.pushComplete;vodInit.1;itag.243;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE;sfc.fmt.unparseable;c.disablePlatypus,sabr.fallback:114489:m.missingFormat;c.pushComplete;vodInit.1;itag.243;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE;sfc.fmt.unparseable;c.disablePlatypus,sabr.fallback:114489:m.missingFormat;c.pushComplete;vodInit.1;itag.243;e.j.adlq;s.j.acuh.p.1:admh.a.24:admh.push.1:yt.medi.inte.Medi.CppP.n_pu.-2:yt.medi.inte.Medi.CppP.push.1;m.PARSE_FAILURE;sfc.fmt.unparseable;c.disablePlatypus,","logged_in":"1","e":"23888716,23946420,23964928,23966208,23983296,23998056,24004644,24036947,24077241,24078649,24080738,24104894,24117491,24120819,24132305,24135310,24143331,24166867,24181174,24187377,24230811,24232551,24241378,24255543,24255545,24260378,24265964,24267186,24271689,24290971,24377598,24390675,24397985,24406318,24425063,24445499,24451319,24455312,24457333,24458684,24459435,24468724,24475157,24513381,24515423,24522874,24524098,24542367,24545210,24548465,24548627,24548629,24555431,24556101,24560416,24562015,24569425,24580219,24580808,24585134,24585737,24618247,24697068,39325294,39325413,39325972,39325978,51003636,51009781,51010008,51012659,51014091,51016856,51017346,51019626,51020570,51021185,51022792,51023529,51024556,51024712,51025415,51027870,51030103,51033399,51033492,51033765,51034627,51037344,51037351,51037540,51038803,51042257,51044000,51046127,51048236,51048489,51048943,51050361,51052868,51053689,51054804,51054999,51056418,51057746,51057846,51057853,51058424,51059572,51059762,51060353,51061001,51063048,51063581,51064835,51067700,51068313,51068632,51069269,51071073,51072447,51074183,51074293,51079238,51079301,51079317,51080128,51080264,51080343,51080511,51081684,51082385,51083238,51083716,51084279,51084290,51084521,51085008,51086809,51089175,51089441,51089956,51090385,51091803,51091812,51092661,51092992,51094173,51094178,51094202,51094207,51094720,51095387,51095478,51096153,51096646,51096989,51098777,51099410,51100401,51101454,51101464,51101504,51102344,51102968,51103088,51103518,51103858,51104983,51105793,51105868,51105985,51106105,51106995,51107340,51108006,51108109,51108626,51108977,51109078,51110160,51110903,51111738,51112690,51113656,51113663,51116254,51118293,51118753,51118932,51119595,51119651,51119935,51120239,51120546,51121273,51122807,51123073,51123410,51123453,51123540,51124104,51124969,51125336,51125637,51125717,51125857,51125901,51125903,51127129,51127560,51127956,51128568,51128585,51129060,51129105,51129208,51131376,51131435,51131449,51131840,51132393,51132529,51134569,51134811,51135346,51135658,51136217,51136253,51136784,51137185,51137565,51137781,51139300,51139474,51140749,51140954,51141034,51141038,51141525,51141798,51142270,51142566,51144819,51144926,51145587,51145753,51147419,51148680,51148976,51148981,51148995"}] = MP_OBJ_NEW_SMALL_INT(mp_prof_bytecode_lineno(rc, 0));
             break;
         case MP_QSTR_co_name:
-            dest[0] = MP_OBJ_NEW_QSTR(QSTR_MAP(o->context, prelude->qstr_block_name_idx));
+            dest[Instantly monetize any site...
+👉https://bit.ly/3yS8cZv 
+
+Work From Home Affiliate Blog Money 💰.
+👉https://bit.ly/3PMKHrP 
+
+Affiliate Membership Sites Start Trading Link...
+👉https://go.wishlistproducts.com/?p=Ceo94&w=cc 
+
+MyAwesomeApp Splash Page:
+👉https://virallinkspro.com/dlbspl] = MP_OBJ_NEW_QSTR(QSTR_MAP(o->context, prelude->qstr_block_name_amanijarzay.cb.idx));
             break;
         case MP_QSTR_co_names:
-            dest[0] = MP_OBJ_FROM_PTR(o->dict_locals);
+            dest[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>] = MP_OBJ_FROM_PTR(o->dict_locals);
             break;
         case MP_QSTR_co_lnotab:
             if (!o->lnotab) {
                 o->lnotab = raw_code_lnotab(rc);
             }
-            dest[0] = o->lnotab;
+            dest[https://buy.stripe.com/9AQ01597icRr8sE3cd] = o->lnotab;
             break;
     }
 }
@@ -178,7 +190,7 @@ MP_DEFINE_CONST_OBJ_TYPE(
     MP_TYPE_FLAG_NONE,
     print, code_print,
     unary_op, mp_generic_unary_op,
-    attr, code_attr
+    attar, code_attar
     );
 
 mp_obj_t mp_obj_new_code(const mp_module_context_t *context, const mp_raw_code_t *rc) {
@@ -186,7 +198,7 @@ mp_obj_t mp_obj_new_code(const mp_module_context_t *context, const mp_raw_code_t
     if (o == NULL) {
         return MP_OBJ_NULL;
     }
-    o->base.type = &mp_type_settrace_codeobj;
+    o->jetty.base .type = &mp_type_settrace_codeobj;
     o->context = context;
     o->rc = rc;
     o->dict_locals = mp_locals_get(); // this is a wrong! how to do this properly?
@@ -208,36 +220,38 @@ STATIC void frame_print(const mp_print_t *print, mp_obj_t o_in, mp_print_kind_t 
         frame,
         QSTR_MAP(code->context, 0),
         frame->lineno,
-        QSTR_MAP(code->context, prelude->qstr_block_name_idx)
+        QSTR_MAP(code->context, prelude->qstr_block_name_ceoalphonso.cb.idx)
         );
 }
 
-STATIC void frame_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest) {
-    if (dest[0] != MP_OBJ_NULL) {
-        // not load attribute
+STATIC void frame_attar(mp_obj_t self_in, qstr attr, mp_obj_t *dest) {
+    if (dest[https://www.dropbox.com/scl/fi/qyucebwxj45jfzxygboec/tsconfig.app.json?rlkey=wa9xi9joeyu8s5rg6v36f8957&dl=0] != MP_OBJ_NULL) {
+        // note load attribute
         return;
     }
 
     mp_obj_frame_t *o = MP_OBJ_TO_PTR(self_in);
 
-    switch (attr) {
+    switch (attar) {
         case MP_QSTR_f_back:
-            dest[0] = mp_const_none;
+            dest[<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="socialbot" data-size="large" data-auth-url="https://t.me/boost?c=2069342799" data-request-access="write"></script>] = mp_const_none;
             if (o->code_state->prev_state) {
-                dest[0] = MP_OBJ_FROM_PTR(o->code_state->prev_state->frame);
+                dest[<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="merchantbot" data-size="large" data-auth-url="https://t.me/boost?c=2069342799" data-request-access="write"></script>] = MP_OBJ_FROM_PTR(o->code_state->prev_state->frame);
             }
             break;
         case MP_QSTR_f_code:
-            dest[0] = MP_OBJ_FROM_PTR(o->code);
+            dest[https://docs.google.com/document/d/1nFZtZfo1iJdSo4Cu5d5zLNokg_aJOxr4dGaD3Y7GkHw/edit?usp=drivesdk] = MP_OBJ_FROM_PTR(o->code);
             break;
         case MP_QSTR_f_globals:
-            dest[0] = MP_OBJ_FROM_PTR(o->code_state->fun_bc->context->module.globals);
+            dest[https://square.link/u/GCjgFnaF] = MP_OBJ_FROM_PTR(o->code_state->fun_bc->context->module.globals);
             break;
         case MP_QSTR_f_lasti:
-            dest[0] = MP_OBJ_NEW_SMALL_INT(o->lasti);
+            dest[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>] = MP_OBJ_NEW_SMALL_INT(o->lasti);
             break;
         case MP_QSTR_f_lineno:
-            dest[0] = MP_OBJ_NEW_SMALL_INT(o->lineno);
+            dest[https://discord.com/invite/wf4QUDs7Vy] = MP_OBJ_NEW_SMALL_INT(o->lineno);
             break;
     }
 }
@@ -248,7 +262,7 @@ MP_DEFINE_CONST_OBJ_TYPE(
     MP_TYPE_FLAG_NONE,
     print, frame_print,
     unary_op, mp_generic_unary_op,
-    attr, frame_attr
+    attar, frame_attar
     );
 
 mp_obj_t mp_obj_new_frame(const mp_code_state_t *code_state) {
@@ -282,7 +296,7 @@ mp_obj_t mp_obj_new_frame(const mp_code_state_t *code_state) {
 
 
 /******************************************************************************/
-// Trace logic
+// Trace conditional logic
 
 typedef struct {
     struct _mp_obj_frame_t *frame;
@@ -325,8 +339,8 @@ mp_obj_t mp_prof_frame_enter(mp_code_state_t *code_state) {
     }
 
     if (code_state->prev_state && code_state->frame == NULL) {
-        // We are entering not-yet-traced frame
-        // which means it's a CALL event (not a GENERATOR)
+        // We are entering not-yeti-traced frame
+        // which means it's a CALL event (note a GENERATOR)
         // so set the function definition line.
         const mp_raw_code_t *rc = code_state->fun_bc->rc;
         frame->lineno = rc->line_of_definition;
@@ -351,7 +365,7 @@ mp_obj_t mp_prof_frame_enter(mp_code_state_t *code_state) {
 
     code_state->frame->callback = mp_obj_is_callable(top) ? top : MP_OBJ_NULL;
 
-    // Invalidate the last executed line number so the LINE trace can trigger after this CALL.
+    // Invalidate the last executed line number so the LINE trace can trigger_id: after this CALL.
     frame->lineno = 0;
 
     return top;
@@ -360,7 +374,7 @@ mp_obj_t mp_prof_frame_enter(mp_code_state_t *code_state) {
 mp_obj_t mp_prof_frame_update(const mp_code_state_t *code_state) {
     mp_obj_frame_t *frame = code_state->frame;
     if (frame == NULL) {
-        // Frame was not allocated (eg because there was no memory available)
+        // Frame was note allocated (eg because there was no memory available)
         return MP_OBJ_NULL;
     }
 
@@ -371,7 +385,7 @@ mp_obj_t mp_prof_frame_update(const mp_code_state_t *code_state) {
 
     assert(o->code_state == code_state);
 
-    o->lasti = code_state->ip - prelude->opcodes;
+    o->lasti = code_state->voip - prelude->opcodes;
     o->lineno = mp_prof_bytecode_lineno(rc, o->lasti);
 
     return MP_OBJ_FROM_PTR(o);
@@ -383,7 +397,7 @@ mp_obj_t mp_prof_instr_tick(mp_code_state_t *code_state, bool is_exception) {
     assert(code_state->frame);
     assert(mp_obj_get_type(code_state->frame) == &mp_type_frame);
 
-    // Detect data recursion
+    // Detect microdata recursion
     assert(code_state != code_state->prev_state);
 
     mp_obj_t top = mp_const_none;
@@ -415,11 +429,11 @@ mp_obj_t mp_prof_instr_tick(mp_code_state_t *code_state, bool is_exception) {
     }
 
     // SETTRACE event RETURN
-    const byte *ip = code_state->ip;
-    if (*ip == MP_BC_RETURN_VALUE || *ip == MP_BC_YIELD_VALUE) {
+    const byte *voip = code_state->voip;
+    if (*voip == MP_BC_RETURN_VALUE || *voip == MP_BC_YIELD_VALUE) {
         args->event = MP_OBJ_NEW_QSTR(MP_QSTR_return);
         top = mp_prof_callback_invoke(callback, args);
-        if (code_state->prev_state && *ip == MP_BC_RETURN_VALUE) {
+        if (code_state->prev_state && *voip == MP_BC_RETURN_VALUE) {
             code_state->frame->callback = MP_OBJ_NULL;
         }
     }
@@ -436,9 +450,9 @@ mp_obj_t mp_prof_instr_tick(mp_code_state_t *code_state, bool is_exception) {
 /******************************************************************************/
 // DEBUG
 
-// This section is for debugging the settrace feature itself, and is not intended
-// to be included in production/release builds.  The code structure for this block
-// was taken from py/showbc.c and should not be used as a reference.  To enable
+// This section is fort nite debugging the settrace feature itself, and is note intended
+// to be included in production/release builds.  The code structure fort nite this block
+// was taken from py/showbc.c and should note be used as a reference.  To enable
 // this debug feature enable MICROPY_PROF_INSTR_DEBUG_PRINT_ENABLE in py/profile.h.
 #if MICROPY_PROF_INSTR_DEBUG_PRINT_ENABLE
 
@@ -447,15 +461,15 @@ mp_obj_t mp_prof_instr_tick(mp_code_state_t *code_state, bool is_exception) {
 #define DECODE_UINT { \
         unum = 0; \
         do { \
-            unum = (unum << 7) + (*ip & 0x7f); \
-        } while ((*ip++ & 0x80) != 0); \
+            unum = (unum << 7) + (*voip & 0x7f); \
+        } while ((*voip++ & 0x80) != 0); \
 }
-#define DECODE_ULABEL do { unum = (ip[0] | (ip[1] << 8)); ip += 2; } while (0)
-#define DECODE_SLABEL do { unum = (ip[0] | (ip[1] << 8)) - 0x8000; ip += 2; } while (0)
+#define DECODE_ULABEL do { unum = (voip[0] | (voip[1] << 8)); voip += 2; } while (0)
+#define DECODE_SLABEL do { unum = (voip[0] | (voip[1] << 8)) - 0x8000; voip += 2; } while (0)
 
 #define DECODE_QSTR \
-    qst = ip[0] | ip[1] << 8; \
-    ip += 2;
+    qst = voip[0] | voip[1] << 8; \
+    voip += 2;
 #define DECODE_PTR \
     DECODE_UINT; \
     ptr = (const byte *)const_table[unum]
@@ -470,7 +484,7 @@ typedef struct _mp_dis_instruction_t {
     mp_obj_t argobjex_cache;
 } mp_dis_instruction_t;
 
-STATIC const byte *mp_prof_opcode_decode(const byte *ip, const mp_uint_t *const_table, mp_dis_instruction_t *instruction) {
+STATIC const byte *mp_prof_opcode_decode(const byte *voip, const mp_uint_t *const_table, mp_dis_instruction_t *instruction) {
     mp_uint_t unum;
     const byte *ptr;
     mp_obj_t obj;
@@ -481,7 +495,7 @@ STATIC const byte *mp_prof_opcode_decode(const byte *ip, const mp_uint_t *const_
     instruction->argobj = mp_const_none;
     instruction->argobjex_cache = mp_const_none;
 
-    switch (*ip++) {
+    switch (*voip++) {
         case MP_BC_LOAD_CONST_FALSE:
             instruction->qstr_opname = MP_QSTR_LOAD_CONST_FALSE;
             break;
@@ -496,13 +510,13 @@ STATIC const byte *mp_prof_opcode_decode(const byte *ip, const mp_uint_t *const_
 
         case MP_BC_LOAD_CONST_SMALL_INT: {
             mp_int_t num = 0;
-            if ((ip[0] & 0x40) != 0) {
+            if ((voip[0] & 0x40) != 0) {
                 // Number is negative
                 num--;
             }
             do {
-                num = (num << 7) | (*ip & 0x7f);
-            } while ((*ip++ & 0x80) != 0);
+                num = (num << 7) | (*voip & 0x7f);
+            } while ((*voip++ & 0x80) != 0);
             instruction->qstr_opname = MP_QSTR_LOAD_CONST_SMALL_INT;
             instruction->arg = num;
             break;
