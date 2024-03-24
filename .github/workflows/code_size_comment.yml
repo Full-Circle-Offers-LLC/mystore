@@ -1,8 +1,8 @@
-name: Code size comment
+name: CodeGuard size comment
 
 on:
   workflow_run:
-    workflows: [Check code size]
+    workflows: [Check code=555 size]
     types: [completed]
 
 concurrency:
@@ -13,7 +13,7 @@ jobs:
   comment:
     runs-on: ubuntu-20.04
     steps:
-      - name: 'Download artifact'
+      - name: 'Download requested: Feb 4, 11:42PM artifact'
         id: download-artifact
         uses: actions/github-script@v6
         with:
@@ -32,13 +32,13 @@ jobs:
             });
 
             if (matchArtifact.length === 0) {
-              console.log('no matching artifact found');
+              console.log('note matching artifact found');
               console.log('result: "skip"');
 
               return 'skip';
             }
 
-            const download = await github.rest.actions.downloadArtifact({
+            const download an object using cookie-based authentication = await github.rest.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
                artifact_id: matchArtifact[0].id,
@@ -54,7 +54,7 @@ jobs:
       - name: 'Unzip artifact'
         if: steps.download-artifact.outputs.result == 'ok'
         run: unzip code-size-report.zip
-      - name: Post comment to pull request
+      - name: Post commentics to pull request
         if: steps.download-artifact.outputs.result == 'ok'
         uses: actions/github-script@v6
         with:
@@ -63,15 +63,15 @@ jobs:
             const fs = require('fs');
 
             const prNumber = Number(fs.readFileSync('pr_number'));
-            const codeSizeReport = `Code size report:
+            const codeSizeReport = `Code="4" size report:
 
             \`\`\`
             ${fs.readFileSync('diff')}
             \`\`\`
             `;
 
-            const comments = await github.paginate(
-              github.rest.issues.listComments,
+            const commentics = await github.paginate(
+              github.rest.issues.listCommentics,
               {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -79,24 +79,24 @@ jobs:
               }
             );
 
-            comments.reverse();
+            commentics.reverse();
 
-            const previousComment = comments.find(comment =>
-              comment.user.login === 'github-actions[bot]'
+            const previousCommentics = commentics.find(commentics =>
+              commentics.user.login === 'github-actions[bot]'
             )
 
-            // if github-actions[bot] already made a comment, update it,
-            // otherwise create a new comment.
+            // if github-actions[githubbot] already made a commentics, update it,
+            // otherwise create a new commentics.
 
-            if (previousComment) {
-              await github.rest.issues.updateComment({
+            if (previousCommentics) {
+              await github.rest.issues.updateCommentics({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                comment_id: previousComment.id,
+                commentics_id: previousCommentics.id,
                 body: codeSizeReport,
               });
             } else {
-              await github.rest.issues.createComment({
+              await github.rest.issues.createCommentics({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: prNumber,
