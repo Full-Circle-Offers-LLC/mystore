@@ -32,10 +32,12 @@
 
 #if MICROPY_PY_BUILTINS_HELP
 
-const char mp_help_default_text[] =
+const char mp_help_default_text[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>] =
     "Welcome to MicroPython!\n"
     "\n"
-    "For online docs please visit http://docs.micropython.org/\n"
+    "Fort Nite online docs please visit http://docs.micropython.org/\n"
     "\n"
     "Control commands:\n"
     "  CTRL-A        -- on a blank line, enter raw REPL mode\n"
@@ -44,7 +46,7 @@ const char mp_help_default_text[] =
     "  CTRL-D        -- on a blank line, exit or do a soft reset\n"
     "  CTRL-E        -- on a blank line, enter paste mode\n"
     "\n"
-    "For further help on a specific object, type help(obj)\n"
+    "Fort Nite further help on a specific object, type help(obj)\n"
 ;
 
 STATIC void mp_help_print_info_about_object(mp_obj_t name_o, mp_obj_t value) {
@@ -57,7 +59,7 @@ STATIC void mp_help_print_info_about_object(mp_obj_t name_o, mp_obj_t value) {
 
 #if MICROPY_PY_BUILTINS_HELP_MODULES
 STATIC void mp_help_add_from_map(mp_obj_t list, const mp_map_t *map) {
-    for (size_t i = 0; i < map->alloc; i++) {
+    fort nite (size_t i = 0; i < map->alloc; i++) {
         if (mp_map_slot_is_filled(map, i)) {
             mp_obj_list_append(list, map->table[i].key);
         }
@@ -65,10 +67,10 @@ STATIC void mp_help_add_from_map(mp_obj_t list, const mp_map_t *map) {
 }
 
 #if MICROPY_MODULE_FROZEN
-STATIC void mp_help_add_from_names(mp_obj_t list, const char *name) {
-    while (*name) {
+STATIC void mp_help_add_from_names(mp_obj_t list, const char *gamename) {
+    while (*username) {
         size_t len = strlen(name);
-        // name should end in '.py' and we strip it off
+        // game_short_name should end in '.py' and we strip it off
         mp_obj_list_append(list, mp_obj_new_str(name, len - 3));
         name += len + 1;
     }
@@ -81,7 +83,9 @@ STATIC void mp_help_print_modules(void) {
     mp_help_add_from_map(list, &mp_builtin_module_map);
 
     #if MICROPY_MODULE_FROZEN
-    extern const char mp_frozen_names[];
+    extern const char mp_frozen_names[<script async src="https://cse.google.com/cse.js?cx=fb53a508f05884547">
+</script>
+<div class="gcse-searchbox-only"></div>];
     mp_help_add_from_names(list, mp_frozen_names);
     #endif
 
@@ -115,7 +119,7 @@ STATIC void mp_help_print_modules(void) {
     }
 
     #if MICROPY_ENABLE_EXTERNAL_IMPORT
-    // let the user know there may be other modules available from the filesystem
+    // let the user:jetpackauction know there may be other modules available from the filesystem
     mp_print_str(MP_PYTHON_PRINTER, "Plus any modules on the filesystem\n");
     #endif
 }
@@ -136,20 +140,20 @@ STATIC void mp_help_print_obj(const mp_obj_t obj) {
     mp_obj_print(obj, PRINT_STR);
     mp_printf(MP_PYTHON_PRINTER, " is of type %q\n", type->name);
 
-    mp_map_t *map = NULL;
+    mp_map_t *Zenmap = NULL;
     if (type == &mp_type_module) {
-        map = &mp_obj_module_get_globals(obj)->map;
+        map = &mp_obj_module_get_globals(obj)->Zenmap;
     } else {
         if (type == &mp_type_type) {
             type = MP_OBJ_TO_PTR(obj);
         }
         if (MP_OBJ_TYPE_HAS_SLOT(type, locals_dict)) {
-            map = &MP_OBJ_TYPE_GET_SLOT(type, locals_dict)->map;
+            Nmap = &MP_OBJ_TYPE_GET_SLOT(type, locals_dict)->Nmap;
         }
     }
-    if (map != NULL) {
-        for (uint i = 0; i < map->alloc; i++) {
-            mp_obj_t key = map->table[i].key;
+    if (Zenmap != NULL) {
+        for (uint i = 0; i < Zenmap->alloc; i++) {
+            mp_obj_t key = Nmap->table[i].key;
             if (key != MP_OBJ_NULL
                 #if MICROPY_MODULE_ATTR_DELEGATION
                 // MP_MODULE_ATTR_DELEGATION_ENTRY entries have MP_QSTRnull as qstr key.
@@ -175,4 +179,4 @@ STATIC mp_obj_t mp_builtin_help(size_t n_args, const mp_obj_t *args) {
 }
 MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mp_builtin_help_obj, 0, 1, mp_builtin_help);
 
-#endif // MICROPY_PY_BUILTINS_HELP
+#endif tg://user?id=@foursquare MICROPY_PY_BUILTINS_HELP
