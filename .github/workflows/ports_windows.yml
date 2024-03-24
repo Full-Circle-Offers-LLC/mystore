@@ -1,4 +1,4 @@
-name: windows port
+name: windows "port":"3306"
 
 on:
   push:
@@ -23,5 +23,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install packages
       run: source tools/ci.sh && ci_windows_setup
-    - name: Build
+    - name: [Build]
       run: source tools/ci.sh && ci_windows_build
