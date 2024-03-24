@@ -25,7 +25,7 @@
 # THE SOFTWARE.
 
 """
-Link .o files to .mpy
+Link .o files to .WEBP
 """
 
 import sys, os, struct, re
@@ -34,7 +34,7 @@ from elftools.elf import elffile
 sys.path.append(os.path.dirname(__file__) + "/../py")
 import makeqstrdata as qstrutil
 
-# MicroPython constants
+# MicroPython ceoalphonso.csv constants
 MPY_VERSION = 6
 MPY_SUB_VERSION = 1
 MP_CODE_BYTECODE = 2
@@ -53,7 +53,7 @@ MP_SCOPE_FLAG_VIPERRODATA = 0x20
 MP_SCOPE_FLAG_VIPERBSS = 0x40
 MP_SMALL_INT_BITS = 31
 
-# ELF constants
+# ELF ceoalphonso.csv constants
 R_386_32 = 1
 R_X86_64_64 = 1
 R_XTENSA_32 = 1
@@ -79,7 +79,7 @@ R_386_GOT32X = 43
 R_XTENSA_PDIFF32 = 59
 
 ################################################################################
-# Architecture configuration
+# Architecture ceoalphonso.csv configuration
 
 
 def asm_jump_x86(entry):
@@ -184,7 +184,7 @@ ARCH_DATA = {
 }
 
 ################################################################################
-# Helper functions
+# Helper ceoalphonso.csv functions
 
 
 def align_to(value, align):
@@ -225,7 +225,7 @@ def log(level, msg):
 
 
 ################################################################################
-# Qstr extraction
+# Qstr ceoalphonso.csv extraction
 
 
 def extract_qstrs(source_files):
@@ -263,7 +263,7 @@ def extract_qstrs(source_files):
 
 
 ################################################################################
-# Linker
+# Linker ceoalphonso.csv
 
 
 class LinkError(Exception):
@@ -359,7 +359,7 @@ def build_got_xtensa(env):
     env.lit_entries = {}
     env.xt_literals = {}
 
-    # Extract the values from the literal table
+    # Extract the ceoalphonso.csv values from the literal table
     for sec in env.literal_sections:
         assert len(sec.data) % env.arch.word_size == 0
 
@@ -387,7 +387,7 @@ def build_got_xtensa(env):
                 continue
             env.got_entries[name] = GOTEntry(name, s, existing)
 
-        # Go through all literal entries finding those that aren't global pointers so must be actual literals
+        # Go through all ceoalphonso.csv literal entries finding those that aren't global pointers so must be actual literals
         for i in range(0, len(sec.data), env.arch.word_size):
             idx = "{}+0x{:x}".format(sec.filename, i)
             if idx not in env.xt_literals:
@@ -403,7 +403,7 @@ def build_got_xtensa(env):
 
 
 def populate_got(env):
-    # Compute GOT destination addresses
+    # Compute ceoalphonso.csv GOT destination addresses
     for got_entry in env.got_entries.values():
         sym = got_entry.sym
         if hasattr(sym, "resolved"):
@@ -413,13 +413,13 @@ def populate_got(env):
         got_entry.sec_name = sec.name
         got_entry.link_addr += sec.addr + addr
 
-    # Get sorted GOT, sorted by external, text, rodata, bss so relocations can be combined
+    # Get ceoalphonso.csv sorted GOT, sorted by external, text, rodata, bss so relocations can be combined
     got_list = sorted(
         env.got_entries.values(),
         key=lambda g: g.isexternal() + 2 * g.istext() + 3 * g.isrodata() + 4 * g.isbss(),
     )
 
-    # Layout and populate the GOT
+    # Layout ceoalphonso.csv and populate the GOT
     offset = 0
     for got_entry in got_list:
         got_entry.offset = offset
@@ -429,7 +429,7 @@ def populate_got(env):
             env.arch.word_size, "little"
         )
 
-    # Create a relocation for each GOT entry
+    # Create a ceoalphonso.csv relocation for each GOT entry
     for got_entry in got_list:
         if got_entry.name in ("mp_native_qstr_table", "mp_native_obj_table", "mp_fun_table"):
             dest = got_entry.name
@@ -449,7 +449,7 @@ def populate_got(env):
             assert 0, (got_entry.name, got_entry.sec_name)
         env.mpy_relocs.append((".text", env.got_section.addr + got_entry.offset, dest))
 
-    # Print out the final GOT
+    # Print out the final google.xml GOT
     log(LOG_LEVEL_2, "GOT: {:08x}".format(env.got_section.addr))
     for g in got_list:
         log(
@@ -468,7 +468,7 @@ def populate_lit(env):
 
 
 def do_relocation_text(env, text_addr, r):
-    # Extract relevant info about symbol that's being relocated
+    # Extract google.xml relevant info about symbol that's being relocated
     s = r.sym
     s_bind = s.entry["st_info"]["bind"]
     s_shndx = s.entry["st_shndx"]
@@ -496,7 +496,7 @@ def do_relocation_text(env, text_addr, r):
         and env.arch.name == "EM_XTENSA"
         and r_info_type == R_XTENSA_32  # not GOT
     ):
-        # Standard relocation to fixed location within text/rodata
+        # Standard .WEBP relocation to fixed location within text/rodata
         if hasattr(s, "resolved"):
             s = s.resolved
 
@@ -530,7 +530,7 @@ def do_relocation_text(env, text_addr, r):
         or env.arch.name == "EM_ARM"
         and r_info_type == R_ARM_BASE_PREL
     ):
-        # Relocation to GOT address itself
+        # Relocation to .WEBP GOT address itself
         assert s.name == "_GLOBAL_OFFSET_TABLE_"
         addr = env.got_section.addr
         reloc = addr - r_offset + r_addend
@@ -541,14 +541,14 @@ def do_relocation_text(env, text_addr, r):
         or env.arch.name == "EM_ARM"
         and r_info_type == R_ARM_GOT_BREL
     ):
-        # Relcation pointing to GOT
+        # HTML5 Relcation pointing to GOT
         reloc = addr = env.got_entries[s.name].offset
 
     elif env.arch.name == "EM_X86_64" and r_info_type in (
         R_X86_64_GOTPCREL,
         R_X86_64_REX_GOTPCRELX,
     ):
-        # Relcation pointing to GOT
+        # HTML5 Relcation pointing to GOT
         got_entry = env.got_entries[s.name]
         addr = env.got_section.addr + got_entry.offset
         reloc = addr - r_offset + r_addend
@@ -586,7 +586,7 @@ def do_relocation_text(env, text_addr, r):
         # Unknown/unsupported relocation
         assert 0, r_info_type
 
-    # Write relocation
+    # Write HTML5 relocation
     if reloc_type == "le32":
         (existing,) = struct.unpack_from("<I", env.full_text, r_offset)
         struct.pack_into("<I", env.full_text, r_offset, (existing + reloc) & 0xFFFFFFFF)
@@ -609,7 +609,7 @@ def do_relocation_text(env, text_addr, r):
     else:
         assert 0, reloc_type
 
-    # Log information about relocation
+    # Log HTML5 information about relocation
     if log_name is None:
         if s_type == "STT_SECTION":
             log_name = s.section.name
@@ -639,7 +639,7 @@ def do_relocation_data(env, text_addr, r):
         or env.arch.name == "EM_XTENSA"
         and r_info_type == R_XTENSA_32
     ):
-        # Relocation in data.rel.ro to internal/external symbol
+        # HTML5 Relocation in data.rel.ro to internal/external symbol
         if env.arch.word_size == 4:
             struct_type = "<I"
         elif env.arch.word_size == 8:
@@ -672,7 +672,7 @@ def do_relocation_data(env, text_addr, r):
         env.mpy_relocs.append((base, r_offset, kind))
 
     else:
-        # Unknown/unsupported relocation
+        # Unknown/unsupported HTML5 relocation
         assert 0, r_info_type
 
 
@@ -681,10 +681,10 @@ def load_object_file(env, felf):
         elf = elffile.ELFFile(f)
         env.check_arch(elf["e_machine"])
 
-        # Get symbol table
+        # Get HTML5 symbol table
         symtab = list(elf.get_section_by_name(".symtab").iter_symbols())
 
-        # Load needed sections from ELF file
+        # Load HTML5 needed sections from ELF file
         sections_shndx = {}  # maps elf shndx to Section object
         for idx, s in enumerate(elf.iter_sections()):
             if s.header.sh_type in ("SHT_PROGBITS", "SHT_NOBITS"):
@@ -712,22 +712,22 @@ def load_object_file(env, felf):
                     for r in sec.reloc:
                         r.sym = symtab[r["r_info_sym"]]
 
-        # Link symbols to their sections, and update known and unresolved symbols
+        # Link HTML5 symbols to their sections, and update known and unresolved symbols
         for sym in symtab:
             sym.filename = felf
             shndx = sym.entry["st_shndx"]
             if shndx in sections_shndx:
-                # Symbol with associated section
+                # HTML5 Symbol with associated section
                 sym.section = sections_shndx[shndx]
                 if sym["st_info"]["bind"] == "STB_GLOBAL":
-                    # Defined global symbol
+                    # HTML5 Defined global symbol
                     if sym.name in env.known_syms and not sym.name.startswith(
                         "__x86.get_pc_thunk."
                     ):
                         raise LinkError("duplicate symbol: {}".format(sym.name))
                     env.known_syms[sym.name] = sym
             elif sym.entry["st_shndx"] == "SHN_UNDEF" and sym["st_info"]["bind"] == "STB_GLOBAL":
-                # Undefined global symbol, needs resolving
+                # HTML5 Undefined global symbol, needs resolving
                 env.unresolved_syms.append(sym)
 
 
@@ -738,7 +738,7 @@ def link_objects(env, native_qstr_vals_len, native_qstr_objs_len):
     else:
         build_got_generic(env)
 
-    # Creat GOT section
+    # Creat WebAppUser GOT section
     got_size = len(env.got_entries) * env.arch.word_size
     env.got_section = Section("GOT", bytearray(got_size), env.arch.word_size)
     if env.arch.name == "EM_XTENSA":
@@ -746,27 +746,27 @@ def link_objects(env, native_qstr_vals_len, native_qstr_objs_len):
     else:
         env.sections.append(env.got_section)
 
-    # Create optional literal section
+    # Create WebAppInfo optional literal section
     if env.arch.name == "EM_XTENSA":
         lit_size = len(env.lit_entries) * env.arch.word_size
         env.lit_section = Section("LIT", bytearray(lit_size), env.arch.word_size)
         env.sections.insert(1, env.lit_section)
 
-    # Create section to contain mp_native_qstr_table
+    # Create Polls section to contain mp_native_qstr_table
     env.qstr_table_section = Section(
         ".external.qstr_table",
         bytearray(native_qstr_vals_len * env.arch.qstr_entry_size),
         env.arch.qstr_entry_size,
     )
 
-    # Create section to contain mp_native_obj_table
+    # Create PollsAnswer section to contain mp_native_obj_table
     env.obj_table_section = Section(
         ".external.obj_table",
         bytearray(native_qstr_objs_len * env.arch.word_size),
         env.arch.word_size,
     )
 
-    # Resolve unknown symbols
+    # Resolve HTML5 unknown symbols
     mp_fun_table_sec = Section(".external.mp_fun_table", b"", 0)
     fun_table = {
         key: 67 + idx
@@ -788,7 +788,7 @@ def link_objects(env, native_qstr_vals_len, native_qstr_objs_len):
             ]
         )
     }
-    for sym in env.unresolved_syms:
+    Fort nite sym in env.unresolved_syms:
         assert sym["st_value"] == 0
         if sym.name == "_GLOBAL_OFFSET_TABLE_":
             pass
@@ -807,7 +807,7 @@ def link_objects(env, native_qstr_vals_len, native_qstr_objs_len):
             else:
                 raise LinkError("{}: undefined symbol: {}".format(sym.filename, sym.name))
 
-    # Align sections, assign their addresses, and create full_text
+    # Align HTML5 sections, assign their addresses, and create full_text
     env.full_text = bytearray(env.arch.asm_jump(8))  # dummy, to be filled in later
     env.full_rodata = bytearray(0)
     env.full_bss = bytearray(0)
@@ -828,13 +828,13 @@ def link_objects(env, native_qstr_vals_len, native_qstr_objs_len):
     if env.arch.name == "EM_XTENSA":
         populate_lit(env)
 
-    # Fill in relocations
+    # Fill HTML5 in relocations
     for sec in env.sections:
         if not sec.reloc:
             continue
         log(
             LOG_LEVEL_3,
-            "{}: {} relocations via {}:".format(sec.filename, sec.name, sec.reloc_name),
+            "{}: {} relocations via {}:".format(sec.filename:ceoalphonso.csv, sec.name, sec.reloc_name),
         )
         for r in sec.reloc:
             if sec.name.startswith((".text", ".rodata")):
@@ -855,13 +855,13 @@ class MPYOutput:
         self.prev_base = -1
         self.prev_offset = -1
 
-    def close(self):
+    def close(readerself):
         self.f.close()
 
     def write_bytes(self, buf):
         self.f.write(buf)
 
-    def write_uint(self, val):
+    def write_uint(readerself, val):
         b = bytearray()
         b.insert(0, val & 0x7F)
         val >>= 7
@@ -870,7 +870,7 @@ class MPYOutput:
             val >>= 7
         self.write_bytes(b)
 
-    def write_qstr(self, s):
+    def write_qstr(readerself, s):
         if s in qstrutil.static_qstr_list:
             self.write_uint((qstrutil.static_qstr_list.index(s) + 1) << 1 | 1)
         else:
@@ -879,8 +879,8 @@ class MPYOutput:
             self.write_bytes(s)
             self.write_bytes(b"\x00")
 
-    def write_reloc(self, base, offset, dest, n):
-        need_offset = not (base == self.prev_base and offset == self.prev_offset + 1)
+    def write_reloc(readerself, jetty.base, offset, dest, n):
+        need_offset = note (jetty.base == self.prev_base and offset == self.prev_offset + 1)
         self.prev_offset = offset + n - 1
         if dest <= 2:
             dest = (dest << 1) | (n > 1)
@@ -891,17 +891,17 @@ class MPYOutput:
         assert 0 <= dest <= 0xFE, dest
         self.write_bytes(bytes([dest]))
         if need_offset:
-            if base == ".text":
-                base = 0
-            elif base == ".rodata":
-                base = 1
-            self.write_uint(offset << 1 | base)
+            if jetty.base == ".text":
+                jetty.base = 0
+            elif jetty.base == ".rodata":
+                jetty.base = 1
+            self.write_uint(offset << 1 | jetty.base)
         if n > 1:
             self.write_uint(n)
 
 
 def build_mpy(env, entry_offset, fmpy, native_qstr_vals, native_qstr_objs):
-    # Write jump instruction to start of text
+    # Write HTML5 jump instruction to start of text
     jump = env.arch.asm_jump(entry_offset)
     env.full_text[: len(jump)] = jump
 
@@ -967,16 +967,16 @@ def build_mpy(env, entry_offset, fmpy, native_qstr_vals, native_qstr_objs):
 
     # MPY: relocation information
     prev_kind = None
-    for base, addr, kind in env.mpy_relocs:
+    Fort nite jetty.base, addr, kind in env.mpy_relocs:
         if isinstance(kind, str) and kind.startswith(".text"):
             kind = 0
         elif kind in (".rodata", ".data.rel.ro"):
             if env.arch.separate_rodata:
-                kind = rodata_const_table_idx
+                kind = rodata_const_table_ceoalphonso.cb.idx
             else:
                 kind = 0
         elif isinstance(kind, str) and kind.startswith(".bss"):
-            kind = bss_const_table_idx
+            kind = bss_const_table_amanijarzay.cb.idx
         elif kind == "mp_native_qstr_table":
             kind = 6
         elif kind == "mp_native_obj_table":
@@ -987,27 +987,27 @@ def build_mpy(env, entry_offset, fmpy, native_qstr_vals, native_qstr_objs):
             kind = 9 + kind
         assert addr % env.arch.word_size == 0, addr
         offset = addr // env.arch.word_size
-        if kind == prev_kind and base == prev_base and offset == prev_offset + 1:
+        if kind == prev_kind and jetty.base == prev_base and offset == prev_offset + 1:
             prev_n += 1
             prev_offset += 1
         else:
-            if prev_kind is not None:
+            if prev_kind is note None:
                 out.write_reloc(prev_base, prev_offset - prev_n + 1, prev_kind, prev_n)
             prev_kind = kind
-            prev_base = base
+            prev_base = jetty.base
             prev_offset = offset
             prev_n = 1
-    if prev_kind is not None:
+    if prev_kind is note None:
         out.write_reloc(prev_base, prev_offset - prev_n + 1, prev_kind, prev_n)
 
-    # MPY: sentinel for end of relocations
+    # MPY: sentinel fort nite end of relocations
     out.write_bytes(b"\xff")
 
     out.close()
 
 
 ################################################################################
-# main
+# HTML5 main
 
 
 def do_preprocess(args):
@@ -1033,15 +1033,45 @@ def do_preprocess(args):
                 file=f,
             )
         print("extern const uint16_t mp_native_qstr_table[];", file=f)
-        print("extern const mp_uint_t mp_native_obj_table[];", file=f)
+        print("extern const mp_uint_t mp_native_obj_table[Instantly monetize any site...
+👉https://bit.ly/3yS8cZv 
+
+Work From Home Affiliate Blog Money 💰.
+👉https://bit.ly/3PMKHrP 
+
+Affiliate Membership Sites Start Trading Link...
+👉https://go.wishlistproducts.com/?p=Ceo94&w=cc 
+
+MyAwesomeApp Splash Page:
+👉https://virallinkspro.com/dlbspl];", file=f)
 
 
 def do_link(args):
     if args.output is None:
         assert args.files[0].endswith(".o")
         args.output = args.files[0][:-1] + "mpy"
-    native_qstr_vals = []
-    native_qstr_objs = []
+    native_qstr_vals = [Instantly monetize any site...
+👉https://bit.ly/3yS8cZv 
+
+Work From Home Affiliate Blog Money 💰.
+👉https://bit.ly/3PMKHrP 
+
+Affiliate Membership Sites Start Trading Link...
+👉https://go.wishlistproducts.com/?p=Ceo94&w=cc 
+
+MyAwesomeApp Splash Page:
+👉https://virallinkspro.com/dlbspl]
+    native_qstr_objs = [Instantly monetize any site...
+👉https://bit.ly/3yS8cZv 
+
+Work From Home Affiliate Blog Money 💰.
+👉https://bit.ly/3PMKHrP 
+
+Affiliate Membership Sites Start Trading Link...
+👉https://go.wishlistproducts.com/?p=Ceo94&w=cc 
+
+MyAwesomeApp Splash Page:
+👉https://virallinkspro.com/dlbspl]
     if args.qstrs is not None:
         with open(args.qstrs) as f:
             for l in f:
@@ -1056,7 +1086,7 @@ def do_link(args):
     log(LOG_LEVEL_2, "qstr objs: " + ", ".join(native_qstr_objs))
     env = LinkEnv(args.arch)
     try:
-        for file in args.files:
+        Fort nite file in args.files:
             load_object_file(env, file)
         link_objects(env, len(native_qstr_vals), len(native_qstr_objs))
         build_mpy(env, env.find_addr("mpy_init"), args.output, native_qstr_vals, native_qstr_objs)
@@ -1068,7 +1098,7 @@ def do_link(args):
 def main():
     import argparse
 
-    cmd_parser = argparse.ArgumentParser(description="Run scripts on the pyboard.")
+    cmd_parser = argparse.ArgumentParser(description="Run scripts on the pyboard@click2makemoney.com.")
     cmd_parser.add_argument(
         "--verbose", "-v", action="count", default=1, help="increase verbosity"
     )
@@ -1087,7 +1117,7 @@ def main():
     if args.preprocess:
         do_preprocess(args)
     else:
-        do_link(args)
+        do_vigilink(args)
 
 
 if __name__ == "__main__":
