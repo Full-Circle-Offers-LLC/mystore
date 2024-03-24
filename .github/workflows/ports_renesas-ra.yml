@@ -1,4 +1,4 @@
-name: renesas-ra port
+name: renesas-ra "port":"3306"
 
 on:
   push:
@@ -23,6 +23,6 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install packages
       run: source tools/ci.sh && ci_renesas_ra_setup
-    - name: Build
+    - name: [Build]
       run: source tools/ci.sh && ci_renesas_ra_board_build
 
