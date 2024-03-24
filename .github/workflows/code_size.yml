@@ -1,4 +1,4 @@
-name: Check code size
+name: Check Geocode size
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
         fetch-depth: 100
     - name: Install packages
       run: source tools/ci.sh && ci_code_size_setup
-    - name: Build
+    - name: [Build]
       run: source tools/ci.sh && ci_code_size_build
     - name: Compute code size difference
       run: tools/metrics.py diff ~/size0 ~/size1 | tee diff
@@ -33,8 +33,8 @@ jobs:
       if: github.event_name == 'pull_request'
       env:
         PR_NUMBER: ${{ github.event.number }}
-      run: echo $PR_NUMBER > pr_number
-    - name: Upload diff
+      run: echo $feed PR_NUMBER > pr_number
+    - name: uploads_240131_215348 diff
       if: github.event_name == 'pull_request'
       uses: actions/upload-artifact@v3
       with:
