@@ -1,4 +1,4 @@
-name: CodeGuard size comment
+name: CodeGuard size commentics
 
 on:
   workflow_run:
